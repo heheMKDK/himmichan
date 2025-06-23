@@ -1,6 +1,8 @@
-﻿let playerName = "You";
-let isWalking = false;
+let playerName = "You";
 let frameToggle = false;
+let cakeCount = 0;
+let cakes = [];
+let walkTimeout;
 
 const kitty = document.getElementById("kitty");
 const cakesContainer = document.getElementById("cakes-container");
@@ -12,14 +14,9 @@ const walkSound = document.getElementById("walkSound");
 const eatSound = document.getElementById("eatSound");
 const popupSound = document.getElementById("popupSound");
 
-let cakeCount = 0;
-let cakes = [];
-
 function startGame() {
   const nameInput = document.getElementById("player-name-input").value.trim();
-  if (nameInput) {
-    playerName = nameInput;
-  }
+  if (nameInput) playerName = nameInput;
 
   document.getElementById("intro-screen").classList.add("hidden");
   document.getElementById("game-container").classList.remove("hidden");
@@ -38,13 +35,10 @@ function animateKitty() {
   }, 300);
 }
 
-let walkTimeout;
-
 function createCakes() {
   for (let i = 0; i < 15; i++) {
     const cake = document.createElement("img");
     cake.src = "cake.png";
-    cake.classList.add("cake");
     cake.style.top = Math.random() * 90 + "%";
     cake.style.left = Math.random() * 90 + "%";
     cakesContainer.appendChild(cake);
@@ -73,9 +67,7 @@ function checkCollision() {
       eatSound.currentTime = 0;
       eatSound.play();
 
-      if (cakeCount === 15) {
-        celebrate();
-      }
+      if (cakeCount === 15) celebrate();
     }
   }
 }
@@ -99,23 +91,19 @@ function resetGame() {
 }
 
 function createClouds() {
-  const cloudsContainer = document.getElementById("clouds-container");
-  const cloudCount = 5;
-
-  for (let i = 0; i < cloudCount; i++) {
+  const container = document.getElementById("clouds-container");
+  for (let i = 0; i < 5; i++) {
     const cloud = document.createElement("div");
     cloud.classList.add("cloud");
     cloud.style.top = Math.random() * 80 + "px";
     cloud.style.animationDuration = (30 + Math.random() * 30) + "s";
     cloud.style.animationDelay = (i * 6) + "s";
-    cloudsContainer.appendChild(cloud);
+    container.appendChild(cloud);
   }
 }
 
 window.addEventListener("keydown", function(e) {
-  if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
-    e.preventDefault();
-  }
+  if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) e.preventDefault();
 });
 
 document.addEventListener("keydown", (e) => {
@@ -130,22 +118,10 @@ document.addEventListener("keydown", (e) => {
   const maxX = container.clientWidth - kitty.clientWidth;
   const maxY = container.clientHeight - kitty.clientHeight;
 
-  if (e.key === "ArrowLeft") {
-    x -= step;
-    moved = true;
-  }
-  if (e.key === "ArrowRight") {
-    x += step;
-    moved = true;
-  }
-  if (e.key === "ArrowUp") {
-    y -= step;
-    moved = true;
-  }
-  if (e.key === "ArrowDown") {
-    y += step;
-    moved = true;
-  }
+  if (e.key === "ArrowLeft") { x -= step; moved = true; }
+  if (e.key === "ArrowRight") { x += step; moved = true; }
+  if (e.key === "ArrowUp") { y -= step; moved = true; }
+  if (e.key === "ArrowDown") { y += step; moved = true; }
 
   x = Math.max(0, Math.min(x, maxX));
   y = Math.max(0, Math.min(y, maxY));
