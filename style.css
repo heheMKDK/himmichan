@@ -1,4 +1,3 @@
-﻿/* General Page Setup */
 body {
   margin: 0;
   font-family: 'Cherry Bomb One', cursive;
@@ -6,7 +5,6 @@ body {
   overflow: hidden;
 }
 
-/* Intro Screen Styles */
 #intro-screen {
   position: absolute;
   width: 100vw;
@@ -47,14 +45,12 @@ body {
   box-shadow: 0 0 10px #ff69b4;
 }
 
-/* Game Container */
 #game-container {
   position: relative;
   width: 100vw;
   height: 100vh;
 }
 
-/* Kitty Character */
 #kitty {
   position: absolute;
   width: 80px;
@@ -65,14 +61,12 @@ body {
   z-index: 10;
 }
 
-/* Cakes */
 #cakes-container img {
   position: absolute;
   width: 50px;
   transition: 0.2s ease-in;
 }
 
-/* Cake Counter */
 #counter {
   position: absolute;
   top: 10px;
@@ -87,7 +81,6 @@ body {
   color: #ff69b4;
 }
 
-/* Celebration Popup */
 #popup {
   position: fixed;
   top: 20%;
@@ -105,12 +98,10 @@ body {
   color: #ff1493;
 }
 
-/* Hide By Default */
 .hidden {
   display: none;
 }
 
-/* Optional: Clouds if you want animated visuals */
 .cloud {
   position: absolute;
   width: 120px;
